@@ -1,0 +1,92 @@
+hydra:
+  job:
+    chdir: True
+run:
+  mode: train
+  output_dir: default
+  mlflow_on: False
+  mlflow_uri: /path/to/mlflow/db
+  seed: 42
+  cudnn_benchmark: False
+  set_deterministic: True
+debug:
+  overfit_last_diffusion_step: False
+train:
+  epochs: 1000
+  batch_size: 100
+  batch_size_test: 100
+  valid_epoch_interval: 5
+  mpjpe_epoch_interval: 100
+  workers: 8
+  lr: 0.0002701385346296177
+  lr_scheduler: plateau
+  lr_min: 0.
+  n_annealing: 1
+  lr_patience: 11  # Only used with plateau lr scheduler
+  lr_threshold: 0.1  # Only used with plateau lr scheduler
+  resume: ""
+  restart_scheduler: False
+  grad_cumul: False
+  grad_cumul_n: 2
+eval:
+  nsamples: 5
+  sample_strategy: average
+  model_s: None
+  model_l: /path/to/dir/with/checkpoint/
+diffusion:
+  layers: 16
+  channels: 64
+  use_nonlocal: True
+  diffusion_embedding_dim: 128
+  beta_start: 0.0001
+  beta_end: 0.5
+  num_steps: 50
+  schedule: cosine
+  arch: gcn
+  mask_conditioning: False
+  p_dropout: 0.2703806090969092
+  conditioning: pt_mixste
+  cond_mix_mode: concat
+  cond_encode_3d: True
+  cond_keep_pt_head: False
+  cond_layers: 8
+  cond_channels: 64
+  cond_nheads: 8
+  cond_ckpt: /path/to/pretrained/models/prt_mixste_h36m_L27_C64.pt
+  p_uncond: 0.
+  guidance: 0.
+  guidance_before_cond: False
+  rand_guidance_rate: 1.
+  anisotropic: False
+  err_var_path: ''
+  err_ave_path: ''
+  skeleton_time_regularization: 0.0
+  skeleton_side_regularization: 0.0
+  disable_diffusion_and_supervise: False
+model:
+  is_unconditional: 0
+  timeemb: 128
+  featureemb: 16
+data:
+  joints: 17
+  keypoints: cpn_ft_h36m_dbb  # 2D detections to use
+  seq_len: 27
+  data_dir: /path/to/data/
+  dataset: h36m  # target dataset
+  actions: '*'  # actions to train/test on, separated by comma, or * for all
+  use_valid: False  # Whether to use a vliadation set
+  miss_rate: 20
+  miss_type: no_miss  # options are 'no_miss', 'random', 'random_left_arm_right_leg', 'structured_joint', 'structured_frame', 'noisy'
+  noise_sigma: 5
+  data: all
+viz:
+  viz_subject: S9
+  viz_action: greeting  # directions,discussion,eating,greeting,phoning,posing,purchases,sitting,sittingdown,smoking,photo,waiting,walking,walkdog,walktogether
+  viz_camera: 0
+  viz_video: ""
+  viz_skip: 0  # skip first N frames of input video
+  viz_output: ""  # output file name (.gif or .mp4)
+  viz_bitrate: 3000  # bitrate for mp4 videos
+  viz_limit: -1  # only render first N frames
+  viz_downsample: 1  # downsample FPS by a factor N
+  viz_size: 5  # image size

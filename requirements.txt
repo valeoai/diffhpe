@@ -1,0 +1,10 @@
+numpy>=1.18.5
+torch==1.13.1
+tqdm>=4.62.3
+pandas>=1.3.5
+matplotlib
+hydra-core
+hydra-optuna-sweeper
+hydra-submitit-launcher
+timm
+# mlflow  <-- Optional

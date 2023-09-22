@@ -1,0 +1,2 @@
+joints: 16
+keypoints: gt  # 2D detections to use

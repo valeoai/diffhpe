@@ -1,0 +1,5 @@
+epochs: 1
+batch_size: 400
+batch_size_test: 100
+valid_epoch_interval: 1
+mpjpe_epoch_interval: 1
